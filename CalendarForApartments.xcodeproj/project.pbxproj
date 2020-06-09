@@ -7,19 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA098095248AD8130012DB08 /* ClientModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA098094248AD8130012DB08 /* ClientModel.swift */; };
+		CA098097248AD94F0012DB08 /* ColorOfDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA098096248AD94F0012DB08 /* ColorOfDays.swift */; };
+		CA098099248AE78E0012DB08 /* DatesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA098098248AE78E0012DB08 /* DatesModel.swift */; };
+		CA5B143524899C44008DE3C6 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5B143424899C44008DE3C6 /* CalendarViewController.swift */; };
 		CAB312D52487FD59003FDA0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB312D42487FD59003FDA0B /* AppDelegate.swift */; };
 		CAB312D72487FD59003FDA0B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB312D62487FD59003FDA0B /* SceneDelegate.swift */; };
-		CAB312D92487FD59003FDA0B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB312D82487FD59003FDA0B /* ViewController.swift */; };
 		CAB312DC2487FD59003FDA0B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAB312DA2487FD59003FDA0B /* Main.storyboard */; };
 		CAB312DE2487FD5C003FDA0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAB312DD2487FD5C003FDA0B /* Assets.xcassets */; };
 		CAB312E12487FD5C003FDA0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAB312DF2487FD5C003FDA0B /* LaunchScreen.storyboard */; };
+		E8A40FC0F55234E4452265D7 /* Pods_CalendarForApartments.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0E8A3EBCAB9F863F87AC8FA /* Pods_CalendarForApartments.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4830FA99B2A6A3F0276F05B5 /* Pods-CalendarForApartments.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalendarForApartments.release.xcconfig"; path = "Pods/Target Support Files/Pods-CalendarForApartments/Pods-CalendarForApartments.release.xcconfig"; sourceTree = "<group>"; };
+		AEE4E94CE6D0393387FFA0CF /* Pods-CalendarForApartments.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalendarForApartments.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CalendarForApartments/Pods-CalendarForApartments.debug.xcconfig"; sourceTree = "<group>"; };
+		C0E8A3EBCAB9F863F87AC8FA /* Pods_CalendarForApartments.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CalendarForApartments.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA098094248AD8130012DB08 /* ClientModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientModel.swift; sourceTree = "<group>"; };
+		CA098096248AD94F0012DB08 /* ColorOfDays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorOfDays.swift; sourceTree = "<group>"; };
+		CA098098248AE78E0012DB08 /* DatesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatesModel.swift; sourceTree = "<group>"; };
+		CA5B143424899C44008DE3C6 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		CAB312D12487FD59003FDA0B /* CalendarForApartments.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarForApartments.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAB312D42487FD59003FDA0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CAB312D62487FD59003FDA0B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CAB312D82487FD59003FDA0B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CAB312DB2487FD59003FDA0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CAB312DD2487FD5C003FDA0B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CAB312E02487FD5C003FDA0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -31,17 +41,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8A40FC0F55234E4452265D7 /* Pods_CalendarForApartments.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0FE367EAB870781FADB7D408 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AEE4E94CE6D0393387FFA0CF /* Pods-CalendarForApartments.debug.xcconfig */,
+				4830FA99B2A6A3F0276F05B5 /* Pods-CalendarForApartments.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		CAB312C82487FD59003FDA0B = {
 			isa = PBXGroup;
 			children = (
 				CAB312D32487FD59003FDA0B /* CalendarForApartments */,
 				CAB312D22487FD59003FDA0B /* Products */,
+				0FE367EAB870781FADB7D408 /* Pods */,
+				E8E58E089F05198CDBA9ACE7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,13 +80,24 @@
 			children = (
 				CAB312D42487FD59003FDA0B /* AppDelegate.swift */,
 				CAB312D62487FD59003FDA0B /* SceneDelegate.swift */,
-				CAB312D82487FD59003FDA0B /* ViewController.swift */,
+				CA5B143424899C44008DE3C6 /* CalendarViewController.swift */,
+				CA098094248AD8130012DB08 /* ClientModel.swift */,
+				CA098096248AD94F0012DB08 /* ColorOfDays.swift */,
+				CA098098248AE78E0012DB08 /* DatesModel.swift */,
 				CAB312DA2487FD59003FDA0B /* Main.storyboard */,
 				CAB312DD2487FD5C003FDA0B /* Assets.xcassets */,
 				CAB312DF2487FD5C003FDA0B /* LaunchScreen.storyboard */,
 				CAB312E22487FD5C003FDA0B /* Info.plist */,
 			);
 			path = CalendarForApartments;
+			sourceTree = "<group>";
+		};
+		E8E58E089F05198CDBA9ACE7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C0E8A3EBCAB9F863F87AC8FA /* Pods_CalendarForApartments.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +107,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CAB312E52487FD5C003FDA0B /* Build configuration list for PBXNativeTarget "CalendarForApartments" */;
 			buildPhases = (
+				E1D09C301EF0B00D71D8510C /* [CP] Check Pods Manifest.lock */,
 				CAB312CD2487FD59003FDA0B /* Sources */,
 				CAB312CE2487FD59003FDA0B /* Frameworks */,
 				CAB312CF2487FD59003FDA0B /* Resources */,
+				62A6F459070BD38559855D1B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -133,14 +168,56 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		62A6F459070BD38559855D1B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-CalendarForApartments/Pods-CalendarForApartments-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Koyomi/Koyomi.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koyomi.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CalendarForApartments/Pods-CalendarForApartments-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E1D09C301EF0B00D71D8510C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CalendarForApartments-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CAB312CD2487FD59003FDA0B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAB312D92487FD59003FDA0B /* ViewController.swift in Sources */,
+				CA5B143524899C44008DE3C6 /* CalendarViewController.swift in Sources */,
+				CA098099248AE78E0012DB08 /* DatesModel.swift in Sources */,
 				CAB312D52487FD59003FDA0B /* AppDelegate.swift in Sources */,
 				CAB312D72487FD59003FDA0B /* SceneDelegate.swift in Sources */,
+				CA098095248AD8130012DB08 /* ClientModel.swift in Sources */,
+				CA098097248AD94F0012DB08 /* ColorOfDays.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,11 +359,13 @@
 		};
 		CAB312E62487FD5C003FDA0B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AEE4E94CE6D0393387FFA0CF /* Pods-CalendarForApartments.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J9389X9HQU;
 				INFOPLIST_FILE = CalendarForApartments/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -300,11 +379,13 @@
 		};
 		CAB312E72487FD5C003FDA0B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4830FA99B2A6A3F0276F05B5 /* Pods-CalendarForApartments.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J9389X9HQU;
 				INFOPLIST_FILE = CalendarForApartments/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
