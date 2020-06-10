@@ -30,13 +30,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="48" height="34"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="главное фото_1288x710" translatesAutoresizingMaskIntoConstraints="NO" id="4sQ-Ya-0mi">
-                                        <rect key="frame" x="0.0" y="34" width="48.000000000000227" height="33.5"/>
+                                        <rect key="frame" x="0.0" y="34" width="48" height="33.5"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="e5SJtfujCkw" translatesAutoresizingMaskIntoConstraints="NO" id="EfH-sS-0el">
                                         <rect key="frame" x="0.0" y="67.5" width="48" height="34"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="главное фото" translatesAutoresizingMaskIntoConstraints="NO" id="OTl-hm-7Jq">
-                                        <rect key="frame" x="0.0" y="101.5" width="48" height="34.000000000000114"/>
+                                        <rect key="frame" x="0.0" y="101.5" width="48" height="34"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aUt-Ms-Y9l">
                                         <rect key="frame" x="0.0" y="135.5" width="48" height="33.5"/>
@@ -45,7 +45,7 @@
                                         <rect key="frame" x="0.0" y="169" width="48" height="34"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2" translatesAutoresizingMaskIntoConstraints="NO" id="B4d-eQ-crT">
-                                        <rect key="frame" x="0.0" y="203" width="48" height="34.000000000000227"/>
+                                        <rect key="frame" x="0.0" y="203" width="48" height="34"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="главное фото_1027x709_1280x900" translatesAutoresizingMaskIntoConstraints="NO" id="Xw8-Wq-Au4">
                                         <rect key="frame" x="0.0" y="237" width="48" height="33.5"/>
