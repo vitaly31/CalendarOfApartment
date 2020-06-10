@@ -38,12 +38,8 @@ class CalendarViewController: UIViewController, KoyomiDelegate {
 
         koyomi.calendarDelegate = self
 
-        colorOfDays.createArray() {completionHendler in
-            for date in completionHendler {
-                print(date.colorOfDate)
-                       }
             
-        }
+        
         selectDates()
    //     monthButton.titleLabel?.text = "Следующий месяц"
         monthButton.setTitle("Следующий месяц", for: .normal)

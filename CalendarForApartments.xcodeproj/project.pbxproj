@@ -10,6 +10,7 @@
 		CA098095248AD8130012DB08 /* ClientModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA098094248AD8130012DB08 /* ClientModel.swift */; };
 		CA098097248AD94F0012DB08 /* ColorOfDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA098096248AD94F0012DB08 /* ColorOfDays.swift */; };
 		CA098099248AE78E0012DB08 /* DatesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA098098248AE78E0012DB08 /* DatesModel.swift */; };
+		CA0B53CA24904120009C068E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0B53C924904120009C068E /* MainViewController.swift */; };
 		CA5B143524899C44008DE3C6 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5B143424899C44008DE3C6 /* CalendarViewController.swift */; };
 		CAB312D52487FD59003FDA0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB312D42487FD59003FDA0B /* AppDelegate.swift */; };
 		CAB312D72487FD59003FDA0B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB312D62487FD59003FDA0B /* SceneDelegate.swift */; };
@@ -26,6 +27,7 @@
 		CA098094248AD8130012DB08 /* ClientModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientModel.swift; sourceTree = "<group>"; };
 		CA098096248AD94F0012DB08 /* ColorOfDays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorOfDays.swift; sourceTree = "<group>"; };
 		CA098098248AE78E0012DB08 /* DatesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatesModel.swift; sourceTree = "<group>"; };
+		CA0B53C924904120009C068E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		CA5B143424899C44008DE3C6 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		CAB312D12487FD59003FDA0B /* CalendarForApartments.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarForApartments.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAB312D42487FD59003FDA0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				CA098094248AD8130012DB08 /* ClientModel.swift */,
 				CA098096248AD94F0012DB08 /* ColorOfDays.swift */,
 				CA098098248AE78E0012DB08 /* DatesModel.swift */,
+				CA0B53C924904120009C068E /* MainViewController.swift */,
 				CAB312DA2487FD59003FDA0B /* Main.storyboard */,
 				CAB312DD2487FD5C003FDA0B /* Assets.xcassets */,
 				CAB312DF2487FD5C003FDA0B /* LaunchScreen.storyboard */,
@@ -212,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA0B53CA24904120009C068E /* MainViewController.swift in Sources */,
 				CA5B143524899C44008DE3C6 /* CalendarViewController.swift in Sources */,
 				CA098099248AE78E0012DB08 /* DatesModel.swift in Sources */,
 				CAB312D52487FD59003FDA0B /* AppDelegate.swift in Sources */,
