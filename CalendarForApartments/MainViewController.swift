@@ -9,21 +9,27 @@
 import UIKit
 
 class MainViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-   
-    
-    @IBOutlet weak var dateLabel: UILabel!
-    
     
 
-    @IBOutlet weak var datesCollectionView: UICollectionView!
+    let colorOfDays = ColorOfDays()
+   
+    let itemPerRow: CGFloat = 7
+    let itemPerColumn: CGFloat = 12
+    let sectionInsets = UIEdgeInsets(top: 2.5, left: 5, bottom: 2.5, right: 5)
     
-    
-    @IBOutlet weak var calendarCollectionView: UICollectionView!
+    @IBOutlet var datesLabel: [UILabel]!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        colorOfDays.datesForTitle()
+        updateDatesLabel()
         dateInLabel()
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        colorOfDays.createArrayOfCalendarForFirstScreen()
         // Do any additional setup after loading the view.
     }
     
@@ -47,12 +53,22 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+
+            return 84
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = calendarCollectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-        return cell
+        
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+            cell.backgroundColor = colorOfDays.arrayOfCalendarForFirstScreen[indexPath.item].colorOfDate
+            return cell
     }
 
+    func updateDatesLabel() {
+        var numberOfElementInArray = 0
+        for oneDateLabel in datesLabel {
+            oneDateLabel.text = colorOfDays.arrayOfTitleDates[numberOfElementInArray]
+            numberOfElementInArray += 1
+        }
+    }
 }

@@ -11,10 +11,12 @@ import UIKit
 class ColorOfDays {
     
 
-       let calendar = Calendar.current
-       var dateOfCalendar = DateOfCalendar(date: Date())
-       var arrayOfClients: [Client] = []
-       var arrayForAllApertment: [[DateOfCalendar]] = []
+    let calendar = Calendar.current
+    var dateOfCalendar = DateOfCalendar(date: Date())
+    var arrayOfClients: [Client] = []
+    var arrayForAllApertment: [[DateOfCalendar]] = []
+    var arrayOfCalendarForFirstScreen: [DateOfCalendar] = []
+    var arrayOfTitleDates: [String] = []
 
 
 
@@ -124,7 +126,40 @@ class ColorOfDays {
            
        }
 
+    func createArrayOfCalendarForFirstScreen() {
 
+        createArraysForAllApertment()
+        for calendarForApartment in arrayForAllApertment {
+            var days = 1
+            for date in calendarForApartment {
+                arrayOfCalendarForFirstScreen.append(date)
+                days += 1
+                if days > 7 {
+                    break
+                }
+            }
+        }
+        
+    }
+    
+    func datesForTitle() {
+        for numberOfDaysAfterToday in 0...7 {
+            let date = calendar.date(byAdding: .day, value: numberOfDaysAfterToday - 1, to: Date())
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd.MM"
+            let monthAndDay = dateFormatter.string(from: date!)
+            let weekDateFormatter = DateFormatter()
+            weekDateFormatter.locale = Locale(identifier: "ru_Ru")
+            weekDateFormatter.dateFormat = "EEEEEE"
+            let weekday = weekDateFormatter.string(from: date!)
+            let capitalizedWeekday = weekday.capitalized
+            let fullDate = monthAndDay + " " + capitalizedWeekday
+            arrayOfTitleDates.append(fullDate)
+            
+        }
+        
+    }
 
    
 }
