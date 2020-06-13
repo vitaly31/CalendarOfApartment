@@ -33,9 +33,9 @@ class ColorOfDays {
            let date3 = createDate(numbersOfDaysAfterToday: 10)
                
 
-           let client1 = Client(dateOfArrival: date1, numbersOfStayingDay: 4, numberOfApartment: 1, color: .red)
-           let client2 = Client(dateOfArrival: date2, numbersOfStayingDay: 8, numberOfApartment: 1, color: .gray)
-           let client3 = Client(dateOfArrival: date3, numbersOfStayingDay: 5, numberOfApartment: 1, color: .brown)
+        let client1 = Client(dateOfArrival: date1, numbersOfStayingDay: 1, numberOfApartment: 1, color: .red, details: "")
+        let client2 = Client(dateOfArrival: date2, numbersOfStayingDay: 1, numberOfApartment: 1, color: .gray, details: "")
+        let client3 = Client(dateOfArrival: date3, numbersOfStayingDay: 1, numberOfApartment: 1, color: .brown, details: "")
            arrayOfClients.append(client1)
            arrayOfClients.append(client2)
            arrayOfClients.append(client3)
@@ -100,7 +100,7 @@ class ColorOfDays {
            
            for var date in arrayOfDateCalendar {
                numberOfElement += 1
-               if self.calendar.isDate(client.dateOfArrival, inSameDayAs: date.date!) {
+               if self.calendar.isDate(client.dateOfArrival, inSameDayAs: date.date) {
                    dayStaying = 1
                }
                if 1 <= dayStaying && dayStaying <= client.numbersOfStayingDay {

@@ -9,9 +9,9 @@
 import UIKit
 
 struct Client {
-    let dateOfArrival: Date
-    let numbersOfStayingDay: Int
-    let numberOfApartment: Int
-    let color: UIColor
-    var datesOfStaying: [Date]?
+    var dateOfArrival: Date
+    var numbersOfStayingDay: Int
+    var numberOfApartment: Int
+    var color: UIColor
+    var details: String
 }

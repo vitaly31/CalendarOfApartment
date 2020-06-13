@@ -71,4 +71,43 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             numberOfElementInArray += 1
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "calendarSegue" {
+            let calendarViewController = segue.destination as! CalendarViewController
+            let indexPath = collectionView.indexPathsForSelectedItems?.first
+            var apartment: Int
+            
+            switch indexPath!.item {
+                
+            case 0...6:
+                apartment = 1
+            case 7...13:
+                apartment = 2
+            case 14...20:
+                apartment = 3
+            case 21...27:
+                apartment = 4
+            case 28...34:
+                apartment = 5
+            case 35...41:
+                apartment = 6
+            case 42...48:
+                apartment = 7
+            case 49...55:
+                apartment = 8
+            case 56...62:
+                apartment = 9
+            case 63...69:
+                apartment = 10
+            case 70...76:
+                apartment = 11
+            case 77...83:
+                apartment = 12
+            default:
+                apartment = 0
+            }
+        calendarViewController.apartment = apartment
+        }
+    }
 }
