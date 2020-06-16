@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AddClientTableViewControllerDelegate {
-    func updateClient(client: Client)
+    func updateClient(client: Client, editSegue: Bool, selectedIndexPath: IndexPath)
 }
 
 class AddClientTableViewController: UITableViewController {
@@ -21,6 +21,7 @@ class AddClientTableViewController: UITableViewController {
     let clientVewController = ClientsViewController()
     var delegate: AddClientTableViewControllerDelegate?
     var editSegue = false
+    var selectedIndexPath: IndexPath = IndexPath(index: 0)
     var client = Client(dateOfArrival: Date(), numbersOfStayingDay: 0, numberOfApartment: 0, color: .white, details: "")
     var dateOfArrivalString = ""
  //   var dataIsRight = false
@@ -44,15 +45,16 @@ class AddClientTableViewController: UITableViewController {
         }
         
         saveButton.isEnabled = false
-        detailTextView.text = """
-        Количество человек:
+        if editSegue == false {
+            detailTextView.text = """
+            Количество человек:
+            Сумма предоплаты:
+            Возможно ли переселить на другую
+            кваритру:
+            Другие подробности:
+            """
+        }
 
-        Сумма предоплаты:
-
-        Возможно ли переселить на другую кваритру:
-                
-        Другие подробности:
-        """
         enableSaveButton()
 }
     
@@ -189,7 +191,8 @@ class AddClientTableViewController: UITableViewController {
         client.details = details
         
         
-        delegate?.updateClient(client: client)
+        delegate?.updateClient(client: client, editSegue: editSegue, selectedIndexPath: selectedIndexPath)
+        
         
         dismiss(animated: true, completion: nil)
         navigationController?.popViewController(animated: true)

@@ -50,15 +50,7 @@ class TransformFormatters {
         }
         return color
     }
-    
-    static func fromDateToString(date: Date) -> String {
-        
-        let day = Calendar.current.component(.day, from: date)
-        let month = Calendar.current.component(.month, from: date)
-        let year = Calendar.current.component(.year, from: date)
-        let dateString = String(day) + String(month) + String(year)
-        return dateString
-    }
+
     
     static func fromColorToString(color: UIColor) -> String {
         let typeOfBooking: String

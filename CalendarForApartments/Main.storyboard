@@ -655,17 +655,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EkN-m1-AGx">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EkN-m1-AGx">
                                 <rect key="frame" x="0.0" y="320" width="320" height="160"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="EkN-m1-AGx" secondAttribute="height" multiplier="2:1" id="Ge9-Dq-4G0"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aHg-58-GYS">
-                                <rect key="frame" x="0.0" y="44" width="320" height="276"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aHg-58-GYS">
+                                <rect key="frame" x="0.0" y="44" width="320" height="246"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ClientCell" id="igd-bd-btj" customClass="ClientTableViewCell" customModule="CalendarForApartments" customModuleProvider="target">
@@ -715,19 +715,34 @@
                                             <outlet property="dateArrivalLabel" destination="vh8-XX-WkZ" id="utM-NW-BuC"/>
                                             <outlet property="numberOfDaysStayingLabel" destination="Ife-NX-aIh" id="S5B-UO-ekY"/>
                                             <outlet property="typeOfBookingLabel" destination="5Xv-cH-2ft" id="qen-g5-xEQ"/>
-                                            <segue destination="nfn-eM-3oA" kind="show" identifier="editCleint" id="iGL-2G-hiR"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fMh-YM-3bQ">
+                                <rect key="frame" x="196" y="290" width="104" height="30"/>
+                                <color key="backgroundColor" red="0.1529411765" green="0.63137254899999995" blue="0.92156862750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="fMh-YM-3bQ" secondAttribute="height" multiplier="52:15" id="bRY-IL-tPV"/>
+                                </constraints>
+                                <state key="normal" title="Изменить">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="editClient:" destination="9hR-mz-IC6" eventType="touchUpInside" id="dbZ-Y5-GDo"/>
+                                    <segue destination="nfn-eM-3oA" kind="show" identifier="editCleint" id="JUA-g9-f7x"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="7fX-Ja-NL9" firstAttribute="bottom" secondItem="EkN-m1-AGx" secondAttribute="bottom" id="Fif-f6-HFn"/>
                             <constraint firstItem="aHg-58-GYS" firstAttribute="leading" secondItem="7fX-Ja-NL9" secondAttribute="leading" id="OtV-Kr-IHc"/>
+                            <constraint firstItem="7fX-Ja-NL9" firstAttribute="trailing" secondItem="fMh-YM-3bQ" secondAttribute="trailing" constant="20" id="Ous-l1-BUq"/>
+                            <constraint firstItem="EkN-m1-AGx" firstAttribute="top" secondItem="fMh-YM-3bQ" secondAttribute="bottom" id="REO-ZO-3v3"/>
                             <constraint firstItem="aHg-58-GYS" firstAttribute="top" secondItem="7fX-Ja-NL9" secondAttribute="top" id="dz3-LY-Xsz"/>
-                            <constraint firstItem="EkN-m1-AGx" firstAttribute="top" secondItem="aHg-58-GYS" secondAttribute="bottom" id="iBg-Zm-R59"/>
                             <constraint firstItem="7fX-Ja-NL9" firstAttribute="trailing" secondItem="EkN-m1-AGx" secondAttribute="trailing" id="r7C-Zc-HhV"/>
+                            <constraint firstItem="fMh-YM-3bQ" firstAttribute="top" secondItem="aHg-58-GYS" secondAttribute="bottom" id="wBa-9b-XVd"/>
                             <constraint firstItem="7fX-Ja-NL9" firstAttribute="trailing" secondItem="aHg-58-GYS" secondAttribute="trailing" id="wR8-h6-bAL"/>
                             <constraint firstItem="EkN-m1-AGx" firstAttribute="leading" secondItem="7fX-Ja-NL9" secondAttribute="leading" id="zLx-E6-kZL"/>
                         </constraints>
@@ -742,6 +757,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="detailLabel" destination="EkN-m1-AGx" id="sEk-aQ-fPZ"/>
+                        <outlet property="editButton" destination="fMh-YM-3bQ" id="MkN-aS-w2f"/>
                         <outlet property="tableView" destination="aHg-58-GYS" id="d1V-37-ek2"/>
                     </connections>
                 </viewController>
@@ -1063,7 +1079,7 @@
         <image name="главное фото_1288x710" width="1288" height="710"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="g7u-GO-ley"/>
+        <segue reference="JUA-g9-f7x"/>
         <segue reference="g0I-XZ-dLd"/>
     </inferredMetricsTieBreakers>
 </document>

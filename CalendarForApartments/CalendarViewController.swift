@@ -32,36 +32,29 @@ class CalendarViewController: UIViewController, KoyomiDelegate {
     @IBOutlet weak var changeButton: UIButton!
     @IBOutlet weak var monthButton: UIButton!
     @IBInspectable  public  var selectedStyleColor : UIColor?
-         public enum SelectedTextState { case change(UIColor), keeping }
-         public var selectedDayTextState: SelectedTextState?
-         public enum SequenceStyle { case background, circle, semicircleEdge, line }
-         public enum Style { case background, circle, line }
     
+    public enum SelectedTextState { case change(UIColor), keeping }
+    public var selectedDayTextState: SelectedTextState?
+    public enum SequenceStyle { case background, circle, semicircleEdge, line }
+    public enum Style { case background, circle, line }
+    
+    public var selectionMode: SelectionMode = .single(style: .circle)
      
-     // default selectionMode is single, circle style
-     public var selectionMode: SelectionMode = .single(style: .circle)
-     
-     // call selectionStyle
-   
-
     public enum MonthType { case previous, current, next }
     @IBOutlet weak var koyomi: Koyomi!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         koyomi.calendarDelegate = self
-
-            
+    
         createCalendarOfClientsForApartment()
         selectDates()
-   //     monthButton.titleLabel?.text = "Следующий месяц"
         monthButton.setTitle("Следующий месяц", for: .normal)
         monthButton.layer.cornerRadius = 10
         changeButton.layer.cornerRadius = 10
         addButton.layer.cornerRadius = 10
         koyomi.display(in: .current)
         koyomi.isHiddenOtherMonth = true
-      //  let currentDateString = koyomi.currentDateString()
         koyomi.weeks = ("ВС", "ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ")
         koyomi.selectionMode = .single(style: .circle)
         koyomi.selectedDayTextState = .change(.white)
@@ -84,24 +77,7 @@ class CalendarViewController: UIViewController, KoyomiDelegate {
     
     func selectDates() {
         
-//        let today = Date()
-//
-//        //let weekLaterDay = Calendar.current.date(components.day, matchesComponents: today)
-//        let weekLaterDay = Calendar.current.date(byAdding: .day, value: 7, to: today)
-//        koyomi.setDayBackgrondColor(calendarForAppartment[3].colorOfDate, of: calendarForAppartment[3].date!, to: calendarForAppartment[3].date!)
-//        koyomi.select(date: today, to: weekLaterDay)
-        //.setDayColor (.white, of: today)
-//        let array: [UIColor] = [.red, .black, .blue, .brown]
-//        var i = 0
-  //      for dateOfCalendar in calendarForAppartment {
-//            koyomi.setDayBackgrondColor(array[i], of: dateOfCalendar.date)
-//            i += 1
-//            if i >= 4 {
-//                break
-//            }
-//            print(dateOfCalendar.colorOfDate)
-//            print(dateOfCalendar.date)
-//        koyomi.setDayBackgrondColor(calendarForAppartment[0].colorOfDate, of: calendarForAppartment[0].date)
+
         for client in calendarOfClientsForAppartment {
             let dateOfLeaving = Calendar.current.date(byAdding: .day, value: client.numbersOfStayingDay - 1, to: client.dateOfArrival)
             koyomi.setDayBackgrondColor(UIColor(red: 255/255.0, green: 95/255.0, blue: 202/255.0, alpha: 1), of: client.dateOfArrival, to: dateOfLeaving)
@@ -130,18 +106,7 @@ class CalendarViewController: UIViewController, KoyomiDelegate {
         }
 
     }
-    // change month
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let clientsViewController = segue.destination as! ClientsViewController
         clientsViewController.apartment = apartment

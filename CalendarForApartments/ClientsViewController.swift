@@ -20,13 +20,17 @@ class ClientsViewController: UIViewController, UITableViewDelegate, UITableViewD
     var dateOfArival = Date()
     var clients: [Client] = []
     var addClient = false
+    var editSegue = false
 
+    @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        editButton.layer.cornerRadius = 10
+        editButton.isEnabled = false
         self.title = "Клиенты на \(apartment) квартиру"
         tableView.delegate = self
         tableView.dataSource = self
@@ -70,20 +74,32 @@ class ClientsViewController: UIViewController, UITableViewDelegate, UITableViewD
         let addClientViewController = navigationViewController.topViewController as! AddClientTableViewController
         addClientViewController.delegate = self
         guard segue.identifier == "editCleint" else { return }
-        let indexPath = tableView.indexPathForSelectedRow!
+        guard let indexPath = tableView.indexPathForSelectedRow else { return }
         let date = clients[indexPath.row].dateOfArrival
         addClientViewController.client.dateOfArrival = date
         addClientViewController.client.numbersOfStayingDay = clients[indexPath.row].numbersOfStayingDay
         addClientViewController.client.color = clients[indexPath.row].color
         addClientViewController.client.details = clients[indexPath.row].details
         addClientViewController.editSegue = true
+        addClientViewController.selectedIndexPath = indexPath
     }
+    @IBAction func editClient(_ sender: UIButton) {
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        editButton.isEnabled = true
+        detailLabel.text = clients[indexPath.row].details
+    }
+    
+
 }
 
 extension ClientsViewController: AddClientTableViewControllerDelegate {
     
-    func updateClient(client: Client) {
-        if let selectedIndexPath = tableView.indexPathForSelectedRow {
+    func updateClient(client: Client, editSegue: Bool, selectedIndexPath: IndexPath) {
+        detailLabel.text = ""
+  //      if let selectedIndexPath = tableView.indexPathForSelectedRow {
+        if editSegue == true {
             clients[selectedIndexPath.row] = client
             clients[selectedIndexPath.row].numberOfApartment = apartment
             tableView.reloadRows(at: [selectedIndexPath], with: .fade)
@@ -93,6 +109,11 @@ extension ClientsViewController: AddClientTableViewControllerDelegate {
             clients[clients.count - 1].numberOfApartment = apartment
             
             tableView.insertRows(at: [newIndexPath], with: .fade)
+            
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+
     }
 }
