@@ -12,51 +12,84 @@ class ColorOfDays {
     
 
     let calendar = Calendar.current
-    var dateOfCalendar = DateOfCalendar(date: Date())
-    var arrayOfClients: [Client] = []
+
+    var clients: [Client] = []
     var arrayForAllApertment: [[DateOfCalendar]] = []
     var arrayOfCalendarForFirstScreen: [DateOfCalendar] = []
     var arrayOfTitleDates: [String] = []
+    
 
 
 
 
 
-       func createDate(numbersOfDaysAfterToday: Int) -> Date {
-           guard let dateInFuture = calendar.date(byAdding: .day, value: numbersOfDaysAfterToday, to: Date()) else { return Date() }
-           return dateInFuture
-       }
+
+//       func createDate(numbersOfDaysAfterToday: Int) -> Date {
+//           guard let dateInFuture = calendar.date(byAdding: .day, value: numbersOfDaysAfterToday, to: Date()) else { return Date() }
+//           return dateInFuture
+//       }
        
-       func createClients() {
-           let date1 = createDate(numbersOfDaysAfterToday: 2)
-           let date2 = createDate(numbersOfDaysAfterToday: 5)
-           let date3 = createDate(numbersOfDaysAfterToday: 10)
-               
 
-        let client1 = Client(dateOfArrival: date1, numbersOfStayingDay: 1, numberOfApartment: 1, color: .red, details: "")
-        let client2 = Client(dateOfArrival: date2, numbersOfStayingDay: 1, numberOfApartment: 1, color: .gray, details: "")
-        let client3 = Client(dateOfArrival: date3, numbersOfStayingDay: 1, numberOfApartment: 1, color: .brown, details: "")
-           arrayOfClients.append(client1)
-           arrayOfClients.append(client2)
-           arrayOfClients.append(client3)
+//           let date1 = createDate(numbersOfDaysAfterToday: 2)
+//           let date2 = createDate(numbersOfDaysAfterToday: 5)
+//           let date3 = createDate(numbersOfDaysAfterToday: 10)
+//
+//
+//        let client1 = Client(dateOfArrival: date1, numbersOfStayingDay: 1, numberOfApartment: 1, color: .red, details: "")
+//        let client2 = Client(dateOfArrival: date2, numbersOfStayingDay: 1, numberOfApartment: 1, color: .gray, details: "")
+//        let client3 = Client(dateOfArrival: date3, numbersOfStayingDay: 1, numberOfApartment: 1, color: .brown, details: "")
+//           arrayOfClients.append(client1)
+//           arrayOfClients.append(client2)
+//           arrayOfClients.append(client3)
+    
+//    func editClient(clientString: ClientString) -> Client {
+//        let client = TransformFormatters.fromClientStringToClient(clientString: clientString)
+//        return client
+//    }
+    
+    func createClients(clientsString: [ClientString]) {
+     
+        clients.removeAll()
+        for clientString in clientsString {
+            let client = TransformFormatters.fromClientStringToClient(clientString: clientString)
+            
+            clients.append(client)
+     }
+//        print("ddd\(clients.first!.dateOfArrival)")
+    }
+    
+    func completeArrayForFirstScreen() {
+        let allDatesArray: [Date] = dates(dateOfArrival: Date(), numbersOfStayingDay: 85)
+
+
+        var dateOfCalendar = DateOfCalendar(date: Date())
+        for date in allDatesArray {
+            
+            dateOfCalendar.date = date
+            arrayOfCalendarForFirstScreen.append(dateOfCalendar)
+        }
+        
+    }
            
-       }
+       
        
        func createArraysForAllApertment() { //массив из всех квартир с календарем где даты раскрашенны в разный цвет
-           
-           createClients()
+         arrayForAllApertment.removeAll()
            for apartment in 1...12 {
                var arrayOfClientForApartment: [Client] = []
-               for client in arrayOfClients{
+               for client in clients {
                    if client.numberOfApartment == apartment {
                        arrayOfClientForApartment.append(client)
                    }
                }
                let arrayForApertment = createMainArray(arrayOfClientForApartment: arrayOfClientForApartment)
+           
                arrayForAllApertment.append(arrayForApertment)
            }
-           
+          // print(arrayForAllApertment)
        }
+    
+    
        
        func createMainArray(arrayOfClientForApartment: [Client]) -> [DateOfCalendar] {
     
@@ -65,29 +98,33 @@ class ColorOfDays {
            let allDatesArray: [Date] = dates(dateOfArrival: Date(), numbersOfStayingDay: 62)
 
 
-
+           var dateOfCalendar = DateOfCalendar(date: Date())
            for date in allDatesArray {
                
                dateOfCalendar.date = date
                arrayOfDates.append(dateOfCalendar)
            }
-               arrayOfDatesFromClient(arrayOfClient: arrayOfClientForApartment, color: .gray, arrayOfDateCalendar: &arrayOfDates)
-               arrayOfDatesFromClient(arrayOfClient: arrayOfClientForApartment, color: .brown, arrayOfDateCalendar: &arrayOfDates)
-               arrayOfDatesFromClient(arrayOfClient: arrayOfClientForApartment, color: .red, arrayOfDateCalendar: &arrayOfDates)
 
+               arrayOfDatesFromClient(arrayOfClient: arrayOfClientForApartment, color: .gray, arrayOfDateCalendar: &arrayOfDates)
+               arrayOfDatesFromClient(arrayOfClient: arrayOfClientForApartment, color: .yellow, arrayOfDateCalendar: &arrayOfDates)
+               arrayOfDatesFromClient(arrayOfClient: arrayOfClientForApartment, color: .blue, arrayOfDateCalendar: &arrayOfDates)
+                arrayOfDatesFromClient(arrayOfClient: arrayOfClientForApartment, color: .red, arrayOfDateCalendar: &arrayOfDates)
+                arrayOfDatesFromClient(arrayOfClient: arrayOfClientForApartment, color: .green, arrayOfDateCalendar: &arrayOfDates)
 
            
            
            return arrayOfDates
        }
        
-       func arrayOfDatesFromClient(arrayOfClient: [Client], color: UIColor, arrayOfDateCalendar: inout [DateOfCalendar]) {
+    func arrayOfDatesFromClient(arrayOfClient: [Client], color: UIColor, arrayOfDateCalendar: inout [DateOfCalendar]) {
            for client in arrayOfClient{
                if client.color == color {
                   arrayOfDateCalendar = createArrayOfDates(client: client, arrayOfDateCalendar: &arrayOfDateCalendar)
+                
+
                }
-               
            }
+
        }
 
        
@@ -111,8 +148,8 @@ class ColorOfDays {
                }
                
            }
-
            return arrayOfDateCalendar
+        
        }
 
 
@@ -127,7 +164,7 @@ class ColorOfDays {
        }
 
     func createArrayOfCalendarForFirstScreen() {
-
+        arrayOfCalendarForFirstScreen.removeAll()
         createArraysForAllApertment()
         for calendarForApartment in arrayForAllApertment {
             var days = 1

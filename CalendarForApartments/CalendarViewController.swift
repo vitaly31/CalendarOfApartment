@@ -8,24 +8,32 @@
 import UIKit
 import Koyomi
 
+protocol CalendarViewControllerDelegate {
+    func updateCollection(apartment: Int, selectedRow: [Int], clientsStringForApartment: [ClientString], newClienstString: [ClientString])
+}
+
 class CalendarViewController: UIViewController, KoyomiDelegate {
    
-    let colorOfDays = ColorOfDays()
-    var calendarOfClientsForAppartment: [Client] = []
+ //   let colorOfDays = ColorOfDays()
+  //  let colorOfDay = ColorOfDays()
+    var clientsString:[ClientString] = []
     var apartment = 0
     var dateOfArrrival = Date()
-    
-    func createCalendarOfClientsForApartment() {
-        colorOfDays.createArraysForAllApertment()
-
-        if apartment > 0 && apartment <= 12 {
-            for client in colorOfDays.arrayOfClients {
-                if client.numberOfApartment == apartment {
-                    calendarOfClientsForAppartment.append(client)
-                }
-            }
-        }
-    }
+    var clients: [Client] = []
+    var selectedRow: [Int] = []
+    var delegate: CalendarViewControllerDelegate?
+    var newClientsString: [ClientString] = []
+//    func createCalendarOfClientsForApartment() {
+//        colorOfDays.createArraysForAllApertment()
+//
+//        if apartment > 0 && apartment <= 12 {
+//            for client in colorOfDays.arrayOfClients {
+//                if client.numberOfApartment == apartment {
+//                    calendarOfClientsForAppartment.append(client)
+//                }
+//            }
+//        }
+//    }
     
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var addButton: UIButton!
@@ -45,9 +53,10 @@ class CalendarViewController: UIViewController, KoyomiDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+
         koyomi.calendarDelegate = self
     
-        createCalendarOfClientsForApartment()
+       
         selectDates()
         monthButton.setTitle("Следующий месяц", for: .normal)
         monthButton.layer.cornerRadius = 10
@@ -76,9 +85,7 @@ class CalendarViewController: UIViewController, KoyomiDelegate {
     }
     
     func selectDates() {
-        
-
-        for client in calendarOfClientsForAppartment {
+        for client in clients {
             let dateOfLeaving = Calendar.current.date(byAdding: .day, value: client.numbersOfStayingDay - 1, to: client.dateOfArrival)
             koyomi.setDayBackgrondColor(UIColor(red: 255/255.0, green: 95/255.0, blue: 202/255.0, alpha: 1), of: client.dateOfArrival, to: dateOfLeaving)
             
@@ -110,10 +117,46 @@ class CalendarViewController: UIViewController, KoyomiDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let clientsViewController = segue.destination as! ClientsViewController
         clientsViewController.apartment = apartment
+        clientsViewController.delegate = self
+        clientsViewController.clientsString = clientsString
         if segue.identifier == "addSegue" {
             clientsViewController.addClient = true
             clientsViewController.dateOfArival = dateOfArrrival
+
+            
+            
+            
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        delegate?.updateCollection(apartment: apartment, selectedRow: selectedRow, clientsStringForApartment: clientsString, newClienstString: newClientsString)
     }
 
 }
+
+
+extension CalendarViewController: ClientsViewControllerDelegate {
+    func updateCalendar(selectedRow: [Int], clientsString: [ClientString], newClientsString newCleintsString: [ClientString]) {
+        
+        
+        self.newClientsString = newCleintsString
+        self.clientsString = clientsString
+        self.selectedRow = selectedRow
+        for clientString in clientsString {
+            self.clients.append(TransformFormatters.fromClientStringToClient(clientString: clientString))
+        }
+        self.selectDates()
+        koyomi.reloadData()
+    }
+}
+
+    
+   
+        
+        
+          
+                
+            
+        

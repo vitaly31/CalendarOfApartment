@@ -70,4 +70,14 @@ class TransformFormatters {
         }
         return typeOfBooking
     }
+    
+    static func fromClientStringToClient(clientString: ClientString) -> Client {
+           var client = Client(dateOfArrival: Date(), numbersOfStayingDay: 0, numberOfApartment: 0, color: .red, details: "")
+           client.dateOfArrival = TransformFormatters.fronStringToDate(dateString: clientString.dateOfArrivalString)!
+        client.numbersOfStayingDay = clientString.numbersOfStayingDay
+        client.numberOfApartment = clientString.numberOfApartment
+        client.color = TransformFormatters.fromStringToColor(typeOfBooking: clientString.typeOfBooking)
+        client.details = clientString.details
+        return client
+    }
 }

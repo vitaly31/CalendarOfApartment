@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 struct Client {
     var dateOfArrival: Date
@@ -14,4 +15,7 @@ struct Client {
     var numberOfApartment: Int
     var color: UIColor
     var details: String
+
 }
+    
+

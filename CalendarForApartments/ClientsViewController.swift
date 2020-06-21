@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import Firebase
 
-
+protocol ClientsViewControllerDelegate {
+    func updateCalendar(selectedRow: [Int], clientsString: [ClientString], newClientsString: [ClientString])
+}
 
 class ClientsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -18,9 +21,15 @@ class ClientsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     var apartment = 0
     var dateOfArival = Date()
-    var clients: [Client] = []
+    var clientsString: [ClientString] = []
+    var clients:[Client] = []
     var addClient = false
     var editSegue = false
+    var selectedRow: [Int] = []
+    var delegate: ClientsViewControllerDelegate?
+    var newClientsString: [ClientString] = []
+    var ref: DatabaseReference!
+
 
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var detailLabel: UILabel!
@@ -29,6 +38,8 @@ class ClientsViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        ref = Database.database().reference(withPath: "clientsString")
         editButton.layer.cornerRadius = 10
         editButton.isEnabled = false
         self.title = "Клиенты на \(apartment) квартиру"
@@ -41,31 +52,62 @@ class ClientsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "ddMMYYYY"
-            addViewController.dateOfArrivalString = dateFormatter.string(from: dateOfArival)
+            addViewController.clientString.dateOfArrivalString = dateFormatter.string(from: dateOfArival)
+            addViewController.apartment = apartment
             addViewController.delegate = self
             show(addViewController, sender: nil)
 
         }
 
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ref.observe(.value) { [weak self] (snapshot) in
+            var _clientsString: [ClientString] = []
+            for item in snapshot.children {
+                let clientString = ClientString(snapshot: item as! DataSnapshot)
+                _clientsString.append(clientString)
+            }
+            self?.clientsString = _clientsString
+            self?.tableView.reloadData()
+     }
+    }
+    
+
+    
+
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return clients.count
+        return clientsString.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ClientCell", for: indexPath) as! ClientTableViewCell
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd.MM"
-        let date = clients[indexPath.row].dateOfArrival
-        let dateOfArrival = dateFormatter.string(from: date)
-        cell.dateArrivalLabel.text = "Дата заезда: \(dateOfArrival)"
-        cell.numberOfDaysStayingLabel.text = "Количество дней: \(String(clients[indexPath.row].numbersOfStayingDay))"
+        let dateOfArrivalString = clientsString[indexPath.row].dateOfArrivalString
+        var charaktersArray: [String] = []
+        for charakter in dateOfArrivalString {
+            charaktersArray.append(String(charakter))
+        }
+        let dateString = charaktersArray[0] + charaktersArray[1] + "." + charaktersArray[2] + charaktersArray[3]
+        cell.dateArrivalLabel.text = "Дата заезда: \(dateString)" //добавить точки убрать год
         
-        let typeOfBooking = TransformFormatters.fromColorToString(color: clients[indexPath.row].color)
+        cell.numberOfDaysStayingLabel.text = "Количество дней: \(String(clientsString[indexPath.row].numbersOfStayingDay))"
+        
+        let typeOfBooking = clientsString[indexPath.row].typeOfBooking
         cell.typeOfBookingLabel.text = "Бронирование: \(typeOfBooking)"
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+            let clientString = clientsString[indexPath.row]
+            clientString.ref?.removeValue()
+            clientsString.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+
+        
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -73,47 +115,83 @@ class ClientsViewController: UIViewController, UITableViewDelegate, UITableViewD
         let navigationViewController = segue.destination as! UINavigationController
         let addClientViewController = navigationViewController.topViewController as! AddClientTableViewController
         addClientViewController.delegate = self
+        addClientViewController.apartment = apartment
         guard segue.identifier == "editCleint" else { return }
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
-        let date = clients[indexPath.row].dateOfArrival
-        addClientViewController.client.dateOfArrival = date
-        addClientViewController.client.numbersOfStayingDay = clients[indexPath.row].numbersOfStayingDay
-        addClientViewController.client.color = clients[indexPath.row].color
-        addClientViewController.client.details = clients[indexPath.row].details
+        
+        let dateOfArrivalString = clientsString[indexPath.row].dateOfArrivalString
+        addClientViewController.clientString.dateOfArrivalString = dateOfArrivalString
+        
+        addClientViewController.clientString.numbersOfStayingDay = clientsString[indexPath.row].numbersOfStayingDay
+        
+        addClientViewController.clientString.typeOfBooking = clientsString[indexPath.row].typeOfBooking
+        
+        addClientViewController.clientString.details = clientsString[indexPath.row].details
         addClientViewController.editSegue = true
         addClientViewController.selectedIndexPath = indexPath
+
     }
     @IBAction func editClient(_ sender: UIButton) {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         editButton.isEnabled = true
-        detailLabel.text = clients[indexPath.row].details
+        detailLabel.text = clientsString[indexPath.row].details
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        delegate?.updateCalendar(selectedRow: selectedRow, clientsString: clientsString, newClientsString: newClientsString)
     }
     
 
 }
 
 extension ClientsViewController: AddClientTableViewControllerDelegate {
-    
-    func updateClient(client: Client, editSegue: Bool, selectedIndexPath: IndexPath) {
+
+    func updateClient(clientString: ClientString, editSegue: Bool, selectedIndexPath: IndexPath) {
         detailLabel.text = ""
-  //      if let selectedIndexPath = tableView.indexPathForSelectedRow {
+
         if editSegue == true {
-            clients[selectedIndexPath.row] = client
-            clients[selectedIndexPath.row].numberOfApartment = apartment
+            let clientString1 = self.clientsString[selectedIndexPath.row]
+            clientString1.ref?.updateChildValues(["dateOfArrivalString" : clientString.dateOfArrivalString, "numbersOfStayingDay" : clientString.numbersOfStayingDay, "typeOfBooking" : clientString.typeOfBooking, "details" : clientString.details])
+            print("yes")
+
+//            clientsString[selectedIndexPath.row] = clientString
+//            clientsString[selectedIndexPath.row].numberOfApartment = apartment
+//            selectedRow.append(selectedIndexPath.row)
+
+
+
+//            var numberOfAllClient = -1
+//            var numberOfClientInApartment = -1
+//            for var client in colorOfDays.clients {
+//                numberOfAllClient += 1
+//                if client.numberOfApartment == apartment{
+//                    numberOfClientInApartment += 1
+//                    if numberOfClientInApartment == selectedIndexPath.row {
+//                        client = colorOfDays.editClient(clientString: clientString)
+//                        colorOfDays.clients[numberOfAllClient] = client
+ //                   }
+
+  //              }
+ //           }
             tableView.reloadRows(at: [selectedIndexPath], with: .fade)
         } else {
-            let newIndexPath = IndexPath(row: clients.count, section: 0)
-            clients.append(client)
-            clients[clients.count - 1].numberOfApartment = apartment
-            
-            tableView.insertRows(at: [newIndexPath], with: .fade)
-            
+//            let newIndexPath = IndexPath(row: clientsString.count, section: 0)
+//            clientsString.append(clientString)
+//            clientsString[clientsString.count - 1].numberOfApartment = apartment
+//            newClientsString.append(clientString)
+//            tableView.insertRows(at: [newIndexPath], with: .fade)
+//            let clientRef = ref.childByAutoId()
+//            clientRef.setValue(clientString.convertToDictionary())
+
         }
     }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
 
-    }
+
 }

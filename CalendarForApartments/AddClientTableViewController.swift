@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import Firebase
 
 protocol AddClientTableViewControllerDelegate {
-    func updateClient(client: Client, editSegue: Bool, selectedIndexPath: IndexPath)
+    func updateClient(clientString: ClientString, editSegue: Bool, selectedIndexPath: IndexPath)
 }
 
 class AddClientTableViewController: UITableViewController {
@@ -22,8 +23,10 @@ class AddClientTableViewController: UITableViewController {
     var delegate: AddClientTableViewControllerDelegate?
     var editSegue = false
     var selectedIndexPath: IndexPath = IndexPath(index: 0)
-    var client = Client(dateOfArrival: Date(), numbersOfStayingDay: 0, numberOfApartment: 0, color: .white, details: "")
-    var dateOfArrivalString = ""
+    var clientString = ClientString(dateOfArrivalString: "", numberOfStayindDay: 0, numberOfApartment: 0, typeOfBooking: "", details: "")
+    var ref: DatabaseReference!
+
+    var apartment = 0
  //   var dataIsRight = false
    
     @IBOutlet weak var dataArrivalTextField: UITextField!
@@ -34,11 +37,12 @@ class AddClientTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        ref = Database.database().reference(withPath: "clientsString")
+        print(apartment)
         choiseUIElement()
         createToolBar()
-        if dateOfArrivalString != "" {
-            dataArrivalTextField.text = dateOfArrivalString
+        if clientString.dateOfArrivalString != "" {
+            dataArrivalTextField.text = clientString.dateOfArrivalString
         }
         if editSegue == true {
             updateTextFields()
@@ -57,6 +61,17 @@ class AddClientTableViewController: UITableViewController {
 
         enableSaveButton()
 }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ref.observe(.value) { (snapshot) in
+            var _clients: [ClientString] = []
+            for item in snapshot.children {
+                let client = ClientString(snapshot: item as! DataSnapshot)
+                _clients.append(client)
+            }
+        }
+    }
     
     @IBAction func textChanged(_ sender: UITextField) {
         enableSaveButton()
@@ -131,24 +146,19 @@ class AddClientTableViewController: UITableViewController {
 //    }
     
     func updateTextFields() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "ddMMYYYY"
-        let dateOfArrival = dateFormatter.string(from: client.dateOfArrival)
-        dataArrivalTextField.text = dateOfArrival
-        numberOfDaysStayingTextField.text = String(client.numbersOfStayingDay)
-        let typeOfBooking = TransformFormatters.fromColorToString(color: client.color)
-        typeOfBookingTextField.text = typeOfBooking
-        detailTextView.text = client.details
+
+        dataArrivalTextField.text = clientString.dateOfArrivalString
+        numberOfDaysStayingTextField.text = String(clientString.numbersOfStayingDay)
+        typeOfBookingTextField.text = clientString.typeOfBooking
+        detailTextView.text = clientString.details
     }
     
     @IBAction func saveAction(_ sender: UIBarButtonItem) {
         
-        let dateOfArrival = dataArrivalTextField.text ?? ""
-        let numberOfDaysStaying = numberOfDaysStayingTextField.text ?? ""
-        let typeOfBooking = typeOfBookingTextField.text ?? ""
+        let dataOfArrivalString = dataArrivalTextField.text ?? ""
 
         
-        guard let date = TransformFormatters.fronStringToDate(dateString: dateOfArrival) else {
+        guard TransformFormatters.fronStringToDate(dateString: dataOfArrivalString) != nil else {
             let dateAlert = UIAlertController(title: "Неправильный формат даты", message: "Введите дату в формате ДДММГГГГ без точек, пробелов и других символов", preferredStyle: .alert)
             let OKAction = UIAlertAction(title: "OK", style: .default)
             dateAlert.addAction(OKAction)
@@ -157,7 +167,9 @@ class AddClientTableViewController: UITableViewController {
             present(dateAlert, animated: true, completion: nil)
             return }
         
-        client.dateOfArrival = date
+        clientString.dateOfArrivalString = dataOfArrivalString
+        
+        let numberOfDaysStaying = numberOfDaysStayingTextField.text ?? ""
         
         guard let number = Int(numberOfDaysStaying) else {
             
@@ -170,9 +182,11 @@ class AddClientTableViewController: UITableViewController {
             return
         }
         
-        client.numbersOfStayingDay = number
+        clientString.numbersOfStayingDay = number
         
-        let color = TransformFormatters.fromStringToColor(typeOfBooking: typeOfBooking)
+        let typeOfBooking1 = typeOfBookingTextField.text ?? ""
+        
+        let color = TransformFormatters.fromStringToColor(typeOfBooking: typeOfBooking1)
         if color == .white {
             
             let alert = UIAlertController(title: "Тип брони не выбран", message: "Выберите откуда бронирование", preferredStyle: .alert)
@@ -185,15 +199,24 @@ class AddClientTableViewController: UITableViewController {
             return
         }
         
-        client.color = color
+        clientString.typeOfBooking = typeOfBooking1
         
         let details = detailTextView.text ?? ""
-        client.details = details
+        clientString.details = details
+        
+        clientString.numberOfApartment = apartment
+        if editSegue == false {
+            let clientRef = ref.childByAutoId()
+            let key = clientRef.key
+            clientRef.setValue(clientString.convertToDictionary())
+        } else {
+//            clientString.ref?.updateChildValues(["typeOfBooking": typeOfBooking1])
+//            print("yes")
+        }
+
         
         
-        delegate?.updateClient(client: client, editSegue: editSegue, selectedIndexPath: selectedIndexPath)
-        
-        
+        delegate?.updateClient(clientString: clientString, editSegue: editSegue, selectedIndexPath: selectedIndexPath)
         dismiss(animated: true, completion: nil)
         navigationController?.popViewController(animated: true)
     }
