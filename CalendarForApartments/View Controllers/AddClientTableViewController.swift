@@ -18,17 +18,14 @@ class AddClientTableViewController: UITableViewController {
     var typesOfBooking = ["Airbnb", "Booking", "Проживает сейчас", "Бронь по предоплате", "Бронь без предоплаты"]
     
     var selectedElement: String?
-
     let clientVewController = ClientsViewController()
     var delegate: AddClientTableViewControllerDelegate?
     var editSegue = false
     var selectedIndexPath: IndexPath = IndexPath(index: 0)
     var clientString = ClientString(dateOfArrivalString: "", numberOfStayindDay: 0, numberOfApartment: 0, typeOfBooking: "", details: "")
     var ref: DatabaseReference!
-
     var apartment = 0
- //   var dataIsRight = false
-   
+    
     @IBOutlet weak var dataArrivalTextField: UITextField!
     @IBOutlet weak var numberOfDaysStayingTextField: UITextField!
     @IBOutlet weak var typeOfBookingTextField: UITextField!
@@ -37,18 +34,21 @@ class AddClientTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         ref = Database.database().reference(withPath: "clientsString")
-        print(apartment)
+        
         choiseUIElement()
         createToolBar()
+        
         if clientString.dateOfArrivalString != "" {
             dataArrivalTextField.text = clientString.dateOfArrivalString
         }
+        
         if editSegue == true {
             updateTextFields()
         }
-        
         saveButton.isEnabled = false
+        
         if editSegue == false {
             detailTextView.text = """
             Количество человек:
@@ -58,9 +58,8 @@ class AddClientTableViewController: UITableViewController {
             Другие подробности:
             """
         }
-
         enableSaveButton()
-}
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -77,7 +76,6 @@ class AddClientTableViewController: UITableViewController {
         enableSaveButton()
     }
     
-    
     func enableSaveButton() {
         let dateOfArrival = dataArrivalTextField.text ?? ""
         let numberOfDaysStaying = numberOfDaysStayingTextField.text ?? ""
@@ -85,68 +83,8 @@ class AddClientTableViewController: UITableViewController {
         saveButton.isEnabled = !dateOfArrival.isEmpty && !numberOfDaysStaying.isEmpty
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        super.prepare(for: segue, sender: sender)
-//        guard segue.identifier == "saveSegue" else { return }
-//        let dateOfArrival = dataArrivalTextField.text ?? ""
-//        let numberOfDaysStaying = numberOfDaysStayingTextField.text ?? ""
-//        let typeOfBooking = typeOfBookingTextField.text ?? ""
-//
-//
-//        guard let date = TransformFormatters.fronStringToDate(dateString: dateOfArrival) else {
-//            let dateAlert = UIAlertController(title: "Неправильный формат даты", message: "Введите дату в формате ДДММГГГГ без точек, пробелов и других символов", preferredStyle: .alert)
-//            let OKAction = UIAlertAction(title: "OK", style: .default)
-//            dateAlert.addAction(OKAction)
-//
-//
-//            present(dateAlert, animated: true, completion: nil)
-//            return }
-//
-//        client.dateOfArrival = date
-//
-//        guard let number = Int(numberOfDaysStaying) else {
-//
-//            let alert = UIAlertController(title: "Введите количество дней проживания", message: " Введите количество дней проживания числом", preferredStyle: .alert)
-//            let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-//
-//            alert.addAction(OKAction)
-//
-//            present(alert, animated: true)
-//            return
-//        }
-//
-//        client.numbersOfStayingDay = number
-//
-//        let color = TransformFormatters.fromStringToColor(typeOfBooking: typeOfBooking)
-//        if color == .white {
-//
-//            let alert = UIAlertController(title: "Тип брони не выбран", message: "Выберите откуда бронирование", preferredStyle: .alert)
-//            let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-//
-//            alert.addAction(OKAction)
-//
-//            present (alert, animated: true)
-//
-//            return
-//        }
-//
-//        client.color = color
-//
-//        let details = detailTextView.text ?? ""
-//        client.details = details
-
-   //     dataIsRight = true
-        
-        
-        
-        
-        
-
-        
-//    }
-    
     func updateTextFields() {
-
+        
         dataArrivalTextField.text = clientString.dateOfArrivalString
         numberOfDaysStayingTextField.text = String(clientString.numbersOfStayingDay)
         typeOfBookingTextField.text = clientString.typeOfBooking
@@ -156,13 +94,10 @@ class AddClientTableViewController: UITableViewController {
     @IBAction func saveAction(_ sender: UIBarButtonItem) {
         
         let dataOfArrivalString = dataArrivalTextField.text ?? ""
-
-        
         guard TransformFormatters.fronStringToDate(dateString: dataOfArrivalString) != nil else {
             let dateAlert = UIAlertController(title: "Неправильный формат даты", message: "Введите дату в формате ДДММГГГГ без точек, пробелов и других символов", preferredStyle: .alert)
             let OKAction = UIAlertAction(title: "OK", style: .default)
             dateAlert.addAction(OKAction)
-            
             
             present(dateAlert, animated: true, completion: nil)
             return }
@@ -170,12 +105,11 @@ class AddClientTableViewController: UITableViewController {
         clientString.dateOfArrivalString = dataOfArrivalString
         
         let numberOfDaysStaying = numberOfDaysStayingTextField.text ?? ""
-        
         guard let number = Int(numberOfDaysStaying) else {
             
             let alert = UIAlertController(title: "Введите количество дней проживания", message: " Введите количество дней проживания числом", preferredStyle: .alert)
             let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                
+            
             alert.addAction(OKAction)
             
             present(alert, animated: true)
@@ -195,7 +129,6 @@ class AddClientTableViewController: UITableViewController {
             alert.addAction(OKAction)
             
             present (alert, animated: true)
-            
             return
         }
         
@@ -207,22 +140,17 @@ class AddClientTableViewController: UITableViewController {
         clientString.numberOfApartment = apartment
         if editSegue == false {
             let clientRef = ref.childByAutoId()
-            let key = clientRef.key
             clientRef.setValue(clientString.convertToDictionary())
         } else {
-//            clientString.ref?.updateChildValues(["typeOfBooking": typeOfBooking1])
-//            print("yes")
+            delegate?.updateClient(clientString: clientString, editSegue: editSegue, selectedIndexPath: selectedIndexPath)
         }
-
         
-        
-        delegate?.updateClient(clientString: clientString, editSegue: editSegue, selectedIndexPath: selectedIndexPath)
         dismiss(animated: true, completion: nil)
         navigationController?.popViewController(animated: true)
     }
     
     @IBAction func cancelAction(_ sender: UIBarButtonItem) {
-
+        
         dismiss(animated: true, completion: nil)
         navigationController?.popViewController(animated: true)
     }
@@ -231,10 +159,8 @@ class AddClientTableViewController: UITableViewController {
         let elementPicker = UIPickerView()
         elementPicker.delegate = self
         typeOfBookingTextField.inputView = elementPicker
-
-        elementPicker.backgroundColor = UIColor(red: 198/255.0, green: 198/255.0, blue: 200/255.0, alpha: 1)
-
         
+        elementPicker.backgroundColor = UIColor(red: 198/255.0, green: 198/255.0, blue: 200/255.0, alpha: 1)
     }
     
     func createToolBar(){
@@ -253,12 +179,11 @@ class AddClientTableViewController: UITableViewController {
     @objc func dismissKeyboard(){
         view.endEditing(true)
     }
-    
 }
 
 extension AddClientTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-       return 1
+        return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -274,7 +199,6 @@ extension AddClientTableViewController: UIPickerViewDelegate, UIPickerViewDataSo
         typeOfBookingTextField.text = selectedElement
         typeOfBookingTextField.textColor = .black
         typeOfBookingTextField.font = UIFont.systemFont(ofSize: 18)
-        
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
@@ -293,5 +217,4 @@ extension AddClientTableViewController: UIPickerViewDelegate, UIPickerViewDataSo
         
         return pickerViewLabel
     }
-    
 }

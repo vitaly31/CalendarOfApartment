@@ -15,7 +15,6 @@
 		CA87251624995107005B8434 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA87251424994FE5005B8434 /* GoogleService-Info.plist */; };
 		CA87251824997594005B8434 /* ClientStringModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA87251724997594005B8434 /* ClientStringModel.swift */; };
 		CA9182D62490E0D7002E8EA1 /* Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9182D52490E0D7002E8EA1 /* Extention.swift */; };
-		CAACF8BD2493A64E00BC87F2 /* DiscriptionColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAACF8BC2493A64E00BC87F2 /* DiscriptionColorViewController.swift */; };
 		CAACF8BF2493B21700BC87F2 /* ClientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAACF8BE2493B21700BC87F2 /* ClientsViewController.swift */; };
 		CAACF8C12493B5E600BC87F2 /* ClientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAACF8C02493B5E600BC87F2 /* ClientTableViewCell.swift */; };
 		CAACF8C52493DB9300BC87F2 /* AddClientTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAACF8C42493DB9300BC87F2 /* AddClientTableViewController.swift */; };
@@ -23,6 +22,7 @@
 		CAB312D72487FD59003FDA0B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB312D62487FD59003FDA0B /* SceneDelegate.swift */; };
 		CAB312DE2487FD5C003FDA0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAB312DD2487FD5C003FDA0B /* Assets.xcassets */; };
 		CAB312E12487FD5C003FDA0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAB312DF2487FD5C003FDA0B /* LaunchScreen.storyboard */; };
+		CADD5F7024A0BFDD00DA783C /* DiscriptionColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD5F6F24A0BFDD00DA783C /* DiscriptionColorViewController.swift */; };
 		CAF95AF42494DCB500D713C0 /* TransformFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF95AF32494DCB500D713C0 /* TransformFormatters.swift */; };
 		CAF95AFA249537D800D713C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAF95AF9249537D800D713C0 /* Main.storyboard */; };
 		E8A40FC0F55234E4452265D7 /* Pods_CalendarForApartments.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0E8A3EBCAB9F863F87AC8FA /* Pods_CalendarForApartments.framework */; };
@@ -40,7 +40,6 @@
 		CA87251424994FE5005B8434 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CA87251724997594005B8434 /* ClientStringModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientStringModel.swift; sourceTree = "<group>"; };
 		CA9182D52490E0D7002E8EA1 /* Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extention.swift; sourceTree = "<group>"; };
-		CAACF8BC2493A64E00BC87F2 /* DiscriptionColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscriptionColorViewController.swift; sourceTree = "<group>"; };
 		CAACF8BE2493B21700BC87F2 /* ClientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsViewController.swift; sourceTree = "<group>"; };
 		CAACF8C02493B5E600BC87F2 /* ClientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientTableViewCell.swift; sourceTree = "<group>"; };
 		CAACF8C42493DB9300BC87F2 /* AddClientTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddClientTableViewController.swift; sourceTree = "<group>"; };
@@ -50,6 +49,7 @@
 		CAB312DD2487FD5C003FDA0B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CAB312E02487FD5C003FDA0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CAB312E22487FD5C003FDA0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CADD5F6F24A0BFDD00DA783C /* DiscriptionColorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscriptionColorViewController.swift; sourceTree = "<group>"; };
 		CAF95AF32494DCB500D713C0 /* TransformFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformFormatters.swift; sourceTree = "<group>"; };
 		CAF95AF9249537D800D713C0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,27 +96,67 @@
 		CAB312D32487FD59003FDA0B /* CalendarForApartments */ = {
 			isa = PBXGroup;
 			children = (
-				CA87251424994FE5005B8434 /* GoogleService-Info.plist */,
-				CAB312D42487FD59003FDA0B /* AppDelegate.swift */,
-				CAB312D62487FD59003FDA0B /* SceneDelegate.swift */,
-				CA5B143424899C44008DE3C6 /* CalendarViewController.swift */,
-				CA098094248AD8130012DB08 /* ClientModel.swift */,
-				CA098096248AD94F0012DB08 /* ColorOfDays.swift */,
-				CA9182D52490E0D7002E8EA1 /* Extention.swift */,
-				CA098098248AE78E0012DB08 /* DatesModel.swift */,
-				CA0B53C924904120009C068E /* MainViewController.swift */,
-				CAACF8BC2493A64E00BC87F2 /* DiscriptionColorViewController.swift */,
-				CAACF8BE2493B21700BC87F2 /* ClientsViewController.swift */,
-				CAACF8C02493B5E600BC87F2 /* ClientTableViewCell.swift */,
-				CAACF8C42493DB9300BC87F2 /* AddClientTableViewController.swift */,
-				CAF95AF32494DCB500D713C0 /* TransformFormatters.swift */,
-				CA87251724997594005B8434 /* ClientStringModel.swift */,
-				CAF95AF9249537D800D713C0 /* Main.storyboard */,
-				CAB312DD2487FD5C003FDA0B /* Assets.xcassets */,
-				CAB312DF2487FD5C003FDA0B /* LaunchScreen.storyboard */,
+				CADD5F6A24A0BA5100DA783C /* Helpers */,
+				CADD5F6B24A0BA7900DA783C /* View Controllers */,
+				CADD5F6C24A0BAA700DA783C /* Models */,
+				CADD5F6D24A0BAD600DA783C /* Additional files */,
+				CADD5F6E24A0BB2B00DA783C /* Interface files */,
 				CAB312E22487FD5C003FDA0B /* Info.plist */,
 			);
 			path = CalendarForApartments;
+			sourceTree = "<group>";
+		};
+		CADD5F6A24A0BA5100DA783C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				CAB312DD2487FD5C003FDA0B /* Assets.xcassets */,
+				CA87251424994FE5005B8434 /* GoogleService-Info.plist */,
+				CAB312D42487FD59003FDA0B /* AppDelegate.swift */,
+				CAB312D62487FD59003FDA0B /* SceneDelegate.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		CADD5F6B24A0BA7900DA783C /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CAACF8C02493B5E600BC87F2 /* ClientTableViewCell.swift */,
+				CA5B143424899C44008DE3C6 /* CalendarViewController.swift */,
+				CA0B53C924904120009C068E /* MainViewController.swift */,
+				CAACF8BE2493B21700BC87F2 /* ClientsViewController.swift */,
+				CAACF8C42493DB9300BC87F2 /* AddClientTableViewController.swift */,
+				CADD5F6F24A0BFDD00DA783C /* DiscriptionColorViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		CADD5F6C24A0BAA700DA783C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CA098094248AD8130012DB08 /* ClientModel.swift */,
+				CA098098248AE78E0012DB08 /* DatesModel.swift */,
+				CA87251724997594005B8434 /* ClientStringModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CADD5F6D24A0BAD600DA783C /* Additional files */ = {
+			isa = PBXGroup;
+			children = (
+				CA098096248AD94F0012DB08 /* ColorOfDays.swift */,
+				CA9182D52490E0D7002E8EA1 /* Extention.swift */,
+				CAF95AF32494DCB500D713C0 /* TransformFormatters.swift */,
+			);
+			path = "Additional files";
+			sourceTree = "<group>";
+		};
+		CADD5F6E24A0BB2B00DA783C /* Interface files */ = {
+			isa = PBXGroup;
+			children = (
+				CAF95AF9249537D800D713C0 /* Main.storyboard */,
+				CAB312DF2487FD5C003FDA0B /* LaunchScreen.storyboard */,
+			);
+			path = "Interface files";
 			sourceTree = "<group>";
 		};
 		E8E58E089F05198CDBA9ACE7 /* Frameworks */ = {
@@ -251,7 +291,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA9182D62490E0D7002E8EA1 /* Extention.swift in Sources */,
-				CAACF8BD2493A64E00BC87F2 /* DiscriptionColorViewController.swift in Sources */,
 				CA0B53CA24904120009C068E /* MainViewController.swift in Sources */,
 				CA87251824997594005B8434 /* ClientStringModel.swift in Sources */,
 				CAF95AF42494DCB500D713C0 /* TransformFormatters.swift in Sources */,
@@ -260,6 +299,7 @@
 				CA5B143524899C44008DE3C6 /* CalendarViewController.swift in Sources */,
 				CA098099248AE78E0012DB08 /* DatesModel.swift in Sources */,
 				CAB312D52487FD59003FDA0B /* AppDelegate.swift in Sources */,
+				CADD5F7024A0BFDD00DA783C /* DiscriptionColorViewController.swift in Sources */,
 				CAB312D72487FD59003FDA0B /* SceneDelegate.swift in Sources */,
 				CAACF8C12493B5E600BC87F2 /* ClientTableViewCell.swift in Sources */,
 				CA098095248AD8130012DB08 /* ClientModel.swift in Sources */,

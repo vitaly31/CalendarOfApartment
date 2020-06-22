@@ -11,6 +11,4 @@ import UIKit
 struct DateOfCalendar {
     var date: Date = Date()
     var colorOfDate: UIColor = .white
-    
-    
 }

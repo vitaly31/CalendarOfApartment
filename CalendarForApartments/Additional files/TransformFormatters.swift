@@ -11,16 +11,15 @@ import UIKit
 class TransformFormatters {
     
     static func fronStringToDate(dateString: String) -> Date? {
-
+        
         var arrayOfCharacter: [String] = []
         
         for chracter in dateString {
             guard Int(String(chracter)) != nil else { return nil }
             arrayOfCharacter.append(String(chracter))
-            
         }
         guard arrayOfCharacter.count == 8 else { return nil }
-
+        
         var dateComponents = DateComponents()
         dateComponents.day = Int(arrayOfCharacter[0] + arrayOfCharacter[1])
         dateComponents.month = Int(arrayOfCharacter[2] + arrayOfCharacter[3])
@@ -36,21 +35,20 @@ class TransformFormatters {
         var color: UIColor
         switch typeOfBooking {
         case "Airbnb":
-            color = .red
+            color = UIColor(red: 250/255.0, green: 17/255.0, blue: 0/255.0, alpha: 1)
         case "Booking":
-            color = .blue
+            color = UIColor(red: 0/255.0, green: 0/255.0, blue: 255/255.0, alpha: 1)
         case "Проживает сейчас":
-            color = .green
+            color = UIColor(red: 70/255.0, green: 200/255.0, blue: 67/255.0, alpha: 1)
         case "Бронь по предоплате":
-            color = .yellow
+            color = UIColor(red: 254/255.0, green: 232/255.0, blue: 0/255.0, alpha: 1)
         case "Бронь без предоплаты":
-            color = .gray
+            color = UIColor(red: 198/255.0, green: 198/255.0, blue: 200/255.0, alpha: 1)
         default:
             color = .white
         }
         return color
     }
-
     
     static func fromColorToString(color: UIColor) -> String {
         let typeOfBooking: String
@@ -72,8 +70,8 @@ class TransformFormatters {
     }
     
     static func fromClientStringToClient(clientString: ClientString) -> Client {
-           var client = Client(dateOfArrival: Date(), numbersOfStayingDay: 0, numberOfApartment: 0, color: .red, details: "")
-           client.dateOfArrival = TransformFormatters.fronStringToDate(dateString: clientString.dateOfArrivalString)!
+        var client = Client(dateOfArrival: Date(), numbersOfStayingDay: 0, numberOfApartment: 0, color: .red, details: "")
+        client.dateOfArrival = TransformFormatters.fronStringToDate(dateString: clientString.dateOfArrivalString)!
         client.numbersOfStayingDay = clientString.numbersOfStayingDay
         client.numberOfApartment = clientString.numberOfApartment
         client.color = TransformFormatters.fromStringToColor(typeOfBooking: clientString.typeOfBooking)

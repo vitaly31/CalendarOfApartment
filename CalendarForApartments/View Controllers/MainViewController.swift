@@ -11,7 +11,6 @@ import Firebase
 
 class MainViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
-
     let colorOfDays = ColorOfDays()
     var clientsString: [ClientString] = []
     var clients: [Client] = []
@@ -26,7 +25,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         ref = Database.database().reference(withPath: "clientsString")
         colorOfDays.datesForTitle()
         updateDatesLabel()
@@ -34,7 +33,6 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         collectionView.dataSource = self
         collectionView.delegate = self
         colorOfDays.completeArrayForFirstScreen()
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,19 +50,13 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             self?.colorOfDays.createArrayOfCalendarForFirstScreen()
             self?.clients = self!.colorOfDays.clients
             self?.collectionView.reloadData()
-            
-            
-
         }
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         ref.removeAllObservers()
     }
-    
-
     
     func dateInLabel() {
         let date = Date()
@@ -76,17 +68,17 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
-            return 84
+        
+        return 84
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
         cell.backgroundColor = colorOfDays.arrayOfCalendarForFirstScreen[indexPath.item].colorOfDate
-            return cell
+        return cell
     }
-
+    
     func updateDatesLabel() {
         var numberOfElementInArray = 0
         for oneDateLabel in datesLabel {
@@ -100,7 +92,6 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             let calendarViewController = segue.destination as! CalendarViewController
             let indexPath = collectionView.indexPathsForSelectedItems?.first
             var apartment: Int
-            calendarViewController.delegate = self
             
             switch indexPath!.item {
                 
@@ -131,7 +122,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             default:
                 apartment = 0
             }
-        calendarViewController.apartment = apartment
+            calendarViewController.apartment = apartment
             for client in colorOfDays.clients {
                 if client.numberOfApartment == apartment {
                     calendarViewController.clients.append(client)
@@ -142,59 +133,6 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
                     calendarViewController.clientsString.append(clientString)
                 }
             }
-            
         }
     }
-}
-
-extension MainViewController: CalendarViewControllerDelegate {
-    func updateCollection(apartment: Int, selectedRow: [Int], clientsStringForApartment: [ClientString], newClienstString: [ClientString]) {
-
-
-
-//        for editRow in selectedRow {
-//            var numberOfAllClients = -1
-//            var numberOfClientsForApartment = -1
-//            for clientString in self.clientsString {
-//                numberOfAllClients += 1
-//                if clientString.numberOfApartment == apartment {
-//                    numberOfClientsForApartment += 1
-//                    if numberOfClientsForApartment == editRow {
-//                        self.clientsString[numberOfAllClients] = clientsStringForApartment[editRow]
-//                        self.clients[numberOfAllClients] = TransformFormatters.fromClientStringToClient(clientString: self.clientsString[numberOfAllClients])
-//
-//                    }
-//                }
-//            }
-//
-//        }
-        var numberOfClientForAllApartments = -1
-        var numberOfClientForApartments = -1
-        for clientString in clientsString {
-            numberOfClientForAllApartments += 1
-            if clientString.numberOfApartment == apartment {
-               numberOfClientForApartments += 1
-                if clientsStringForApartment.count - 1 >= numberOfClientForApartments {
-                    clientsString[numberOfClientForAllApartments] = clientsStringForApartment[numberOfClientForApartments]
-                } else {
-                    clientsString.remove(at: numberOfClientForAllApartments)
-                    numberOfClientForAllApartments -= 1
-                }
-            }
-        }
-        for newClientString in newClienstString {
-            self.clientsString.append(newClientString)
-        }
-        
-        colorOfDays.createClients(clientsString: clientsString)
-        self.clients = colorOfDays.clients
-        colorOfDays.createArrayOfCalendarForFirstScreen()
-        collectionView.reloadData()
-        
-        
-    }
-    
-
-
-
 }

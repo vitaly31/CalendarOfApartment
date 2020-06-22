@@ -290,7 +290,7 @@
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oWz-jP-8FI">
                                                 <rect key="frame" x="39" y="0.0" width="39" height="35"/>
-                                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.27480810880661011" green="0.78316646814346313" blue="0.26252242922782898" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="oWz-jP-8FI" secondAttribute="height" multiplier="10:9" id="5Oj-V9-Jmc"/>
                                                 </constraints>
@@ -490,7 +490,7 @@
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BPl-FM-YTs">
                                                 <rect key="frame" x="39" y="0.0" width="39" height="35"/>
-                                                <color key="backgroundColor" red="1" green="0.37254901960784315" blue="0.792156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.98043078184127808" green="0.36853823065757751" blue="0.8160746693611145" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="BPl-FM-YTs" secondAttribute="height" multiplier="10:9" id="gnv-Wd-3UZ"/>
                                                 </constraints>
@@ -729,7 +729,6 @@
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="editClient:" destination="9hR-mz-IC6" eventType="touchUpInside" id="dbZ-Y5-GDo"/>
                                     <segue destination="nfn-eM-3oA" kind="show" identifier="editCleint" id="JUA-g9-f7x"/>
                                 </connections>
                             </button>
@@ -1015,7 +1014,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9KA-wn-fTV" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ZrF-uJ-UXc">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1033,7 +1032,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SSn-Vh-GHL" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Mc6-3k-73Q">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
